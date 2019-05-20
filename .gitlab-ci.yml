@@ -1,0 +1,15 @@
+image: circleci/android:api-28
+
+stages:
+- build
+
+cache:
+  key: ${CI_PROJECT_ID}
+  paths:
+  - .gradle/
+
+build:
+  stage: build
+  script:
+  - ./gradlew -stop
+  - ./gradlew assembleDebug

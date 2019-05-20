@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    defaultConfig {
+        applicationId "com.edicasoft.journeyreport"
+        minSdkVersion build_versions.min_sdk
+        compileSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.support.appcompat
+    implementation deps.support.core_ktx
+    implementation deps.support.recyclerview
+    implementation deps.support.material
+    implementation deps.support.legacySupport
+
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.common
+    annotationProcessor deps.lifecycle.compiler
+
+    implementation deps.dagger.dagger
+    implementation deps.dagger.android
+    kapt deps.dagger.compiler
+    kapt deps.dagger.processor
+
+    implementation deps.retrofit.retrofit
+    implementation deps.retrofit.converter
+    implementation deps.retrofit.adapter
+
+    implementation deps.okHttp.okHttp
+    implementation deps.okHttp.okHttpLogger
+
+    implementation deps.room.room
+    kapt deps.room.compiler
+    implementation deps.room.rxjava
+
+    implementation deps.groupie
+
+    implementation deps.rx.android
+
+    implementation deps.constraintlayout.runtime
+
+    implementation deps.work.runtime
+    implementation deps.work.rx
+
+    testImplementation deps.junit
+
+    androidTestImplementation deps.atsl.runner
+    androidTestImplementation deps.atsl.rules
+}
