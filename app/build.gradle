@@ -23,6 +23,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":permission")
+
     implementation deps.support.appcompat
     implementation deps.support.core_ktx
     implementation deps.support.recyclerview
