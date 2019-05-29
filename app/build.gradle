@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: '../config/quality/quality.gradle'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -20,6 +21,12 @@ android {
         }
     }
 }
+configurations {
+    all {
+        exclude module: 'httpclient'
+        exclude module: 'xpp3'
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -32,7 +39,7 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.common
-    annotationProcessor deps.lifecycle.compiler
+    kapt deps.lifecycle.compiler
 
     implementation deps.dagger.dagger
     implementation deps.dagger.android
