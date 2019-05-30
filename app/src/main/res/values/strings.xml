@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JourneyReport</string>
+    <string name="title_onbording_feature">Onbording</string>
 </resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dynamic_module_name">onbording_feature</string>
+    <string name="dynamic_module_activity">com.edicasoft.onbording_feature.OnbordingActivity</string>
+</resources>

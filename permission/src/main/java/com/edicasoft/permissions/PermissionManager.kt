@@ -28,13 +28,16 @@ class PermissionManager private constructor(private val builder: Builder) {
         internal var rationaleStrategy: ShowRequestPermissionRationaleStrategy =
             DefaultShowRequestPermissionRationaleStrategy()
 
-        fun setShowRequestPermissionRationaleStrategy(rationaleStrategy: ShowRequestPermissionRationaleStrategy) =
+        fun setShowRequestPermissionRationaleStrategy(
+            rationaleStrategy: ShowRequestPermissionRationaleStrategy) =
             apply { this.rationaleStrategy = rationaleStrategy }
 
-        fun request(permission: PermissionItem, callback: PermissionRequestCallback): PermissionManager =
+        fun request(permission: PermissionItem,
+            callback: PermissionRequestCallback): PermissionManager =
             request(arrayOf(permission), callback)
 
-        fun request(permissions: Array<PermissionItem>, callback: PermissionRequestCallback): PermissionManager =
+        fun request(permissions: Array<PermissionItem>,
+            callback: PermissionRequestCallback): PermissionManager =
             PermissionManager(this).apply {
                 request(permissions, callback)
             }
@@ -42,7 +45,8 @@ class PermissionManager private constructor(private val builder: Builder) {
 
     companion object {
         fun isGranted(context: Context, permission: String) =
-            ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(context,
+                permission) == PackageManager.PERMISSION_GRANTED
 
         fun isRationale(activity: FragmentActivity, permission: String) =
             ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
