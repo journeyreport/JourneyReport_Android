@@ -20,13 +20,17 @@ internal class PermissionFragment : Fragment() {
     private val rationaleAsked = mutableListOf<String>()
 
     private val rationalePermissions: List<PermissionItem>
-        get() = permissions.filter { PermissionManager.isRationale(checkNotNull(activity), it.permission) }
+        get() = permissions.filter {
+            PermissionManager.isRationale(checkNotNull(activity), it.permission)
+        }
 
     private val rationaleNotAsked: List<PermissionItem>
         get() = rationalePermissions.filterNot { rationaleAsked.contains(it.permission) }
 
     private val notGrantedPermissions: List<PermissionItem>
-        get() = permissions.filterNot { PermissionManager.isGranted(checkNotNull(activity), it.permission) }
+        get() = permissions.filterNot {
+            PermissionManager.isGranted(checkNotNull(activity), it.permission)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

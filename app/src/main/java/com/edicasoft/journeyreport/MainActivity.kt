@@ -1,12 +1,10 @@
 package com.edicasoft.journeyreport
 
-import android.Manifest
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.edicasoft.permissions.PermissionItem
-import com.edicasoft.permissions.PermissionManager
-import com.edicasoft.permissions.PermissionRequestCallback
+import com.edicasoft.journeyreport.dynamicFeature.DynamicFeatureCallbackBuilder
+import com.edicasoft.journeyreport.dynamicFeature.DynamicFeatureController
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,17 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        PermissionManager.Builder(this)
-            .request(
-                arrayOf(
-                    PermissionItem(Manifest.permission.CAMERA, "camera is required"),
-                    PermissionItem(Manifest.permission.RECORD_AUDIO, "audio recording is required")
-                ),
-                object : PermissionRequestCallback {
-                    override fun permissionRequestResult(granted: Boolean, notGranted: Array<String>) {
-                        Log.d("MainActivity", "grated - " + granted + ", not grated - " + notGranted.joinToString(","))
-                    }
+        val feature = DynamicFeatureController(this)
+        feature.run(getString(R.string.dynamic_module_name), DynamicFeatureCallbackBuilder.build {
+            Intent().setClassName(BuildConfig.APPLICATION_ID,
+                getString(R.string.dynamic_module_activity))
+                .also {
+                    startActivity(it)
                 }
-            )
+        })
     }
 }

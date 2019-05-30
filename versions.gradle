@@ -17,7 +17,6 @@ versions.constraintlayout = "1.1.2"
 versions.work = "2.0.0"
 def deps = [:]
 
-
 deps.kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 
@@ -89,12 +88,14 @@ atsl.runner = "com.android.support.test:runner:1.0.1"
 atsl.rules = "com.android.support.test:rules:3.1.0-alpha"
 deps.atsl = atsl
 
+deps.play_code = "com.google.android.play:core:1.4.0"
+
 ext.deps = deps
 
 def addRepos(RepositoryHandler handler) {
-    handler.google()
-    handler.jcenter()
-    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+  handler.google()
+  handler.jcenter()
+  handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 ext.addRepos = this.&addRepos
