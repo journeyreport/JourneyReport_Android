@@ -5,84 +5,86 @@ apply plugin: 'kotlin-kapt'
 apply from: '../config/quality/quality.gradle'
 
 android {
-  compileSdkVersion build_versions.target_sdk
-  defaultConfig {
-    applicationId "com.edicasoft.journeyreport"
-    minSdkVersion build_versions.min_sdk
     compileSdkVersion build_versions.target_sdk
-    versionCode 1
-    versionName "1.0"
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        applicationId "com.edicasoft.journeyreport"
+        minSdkVersion build_versions.min_sdk
+        compileSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-  dynamicFeatures = [":onbording_feature"]
+    dynamicFeatures = [":onbording_feature"]
 }
 kapt {
-  generateStubs = true
+    generateStubs = true
 }
 configurations {
-  all {
-    exclude module: 'httpclient'
-    exclude module: 'xpp3'
-  }
+    all {
+        exclude module: 'httpclient'
+        exclude module: 'xpp3'
+    }
 }
 
 dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-  api project(":permission")
+    api project(":permission")
 
-  implementation deps.play_code
+    implementation deps.play_code
 
-  api deps.support.appcompat
-  api deps.support.core_ktx
-  implementation deps.support.recyclerview
-  implementation deps.support.material
-  implementation deps.support.legacySupport
+    api deps.support.appcompat
+    api deps.support.core_ktx
+    api deps.constraintlayout.runtime
+    implementation deps.support.recyclerview
+    implementation deps.support.material
+    implementation deps.support.legacySupport
 
-  api deps.lifecycle.runtime
-  api deps.lifecycle.extensions
-  api deps.lifecycle.common
-  kapt deps.lifecycle.compiler
+    api deps.lifecycle.runtime
+    api deps.lifecycle.extensions
+    api deps.lifecycle.common
+    kapt deps.lifecycle.compiler
 
-  implementation deps.dagger.dagger
-  implementation deps.dagger.android
-  kapt deps.dagger.compiler
-  kapt deps.dagger.processor
+    implementation deps.dagger.dagger
+    implementation deps.dagger.android
+    kapt deps.dagger.compiler
+    kapt deps.dagger.processor
 
-  implementation deps.retrofit.retrofit
-  implementation deps.retrofit.converter
-  implementation deps.retrofit.adapter
+    implementation deps.retrofit.retrofit
+    implementation deps.retrofit.converter
+    implementation deps.retrofit.adapter
 
-  implementation deps.okHttp.okHttp
-  implementation deps.okHttp.okHttpLogger
+    implementation deps.okHttp.okHttp
+    implementation deps.okHttp.okHttpLogger
 
-  implementation deps.room.room
-  kapt deps.room.compiler
-  implementation deps.room.rxjava
+    implementation deps.room.room
+    kapt deps.room.compiler
+    implementation deps.room.rxjava
 
-  implementation deps.groupie
+    implementation deps.groupie
 
-  implementation deps.rx.android
+    implementation deps.rx.android
 
-  implementation deps.constraintlayout.runtime
+    implementation deps.constraintlayout.runtime
 
-  implementation deps.work.runtime
-  implementation deps.work.rx
+    implementation deps.work.runtime
+    implementation deps.work.rx
 
-  testImplementation deps.junit
+    testImplementation deps.junit
 
-  androidTestImplementation deps.atsl.runner
-  androidTestImplementation deps.atsl.rules
-  api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    androidTestImplementation deps.atsl.runner
+    androidTestImplementation deps.atsl.rules
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
