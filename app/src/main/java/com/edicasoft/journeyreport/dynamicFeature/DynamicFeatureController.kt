@@ -54,6 +54,9 @@ class DynamicFeatureController(
         SplitInstallManagerFactory.create(activity.application)
     }
 
+    override fun run(name: Int, callback: DynamicFeatureCallback) = run(activity.getString(name),
+        callback)
+
     override fun run(name: String, callback: DynamicFeatureCallback) {
         if (manager.installedModules.contains(name)) {
             callback.installedCallback.invoke()
